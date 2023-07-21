@@ -86,6 +86,25 @@ function MonsterEditor(props) {
                     </div>     
                 </div>
             </div>
+            <div className={styles.thirdSection}>
+                <div>
+                    <label htmlFor="expectedChallengeRating" 
+                            title="Expected Challenge Rating">
+                                ECR
+                                <sup>(?)</sup>
+                    </label>
+                    <input type="number" min={0} max={30} 
+                            name="expectedChallengeRating" />
+                </div>
+                <div>
+                    <label htmlFor="armorClass">AC</label>
+                    <input type="number" name="armorClass" />
+                </div>
+                <div>
+                    <label htmlFor="hitPoints">HP</label>
+                    <input type="number" name="hitPoints" />
+                </div>
+            </div>
             <div className={styles.buttonWrapper}>
                 <button>Update</button>
             </div>
