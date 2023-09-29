@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css"
 import MonsterEditor from "./MonsterEditor";
+import MonsterStatisticsTableGenerator from "./MonsterStatisticsTableGenerator";
 
 function App() {
   const [monsterDetails, setMonsterDetails] = useState({})
@@ -24,11 +25,11 @@ function App() {
     }
   }
 
-  const defineAverageHitPoints = (hitPoints, hitDie, constitutionModifier) => {
+  const defineHitPointCalculations = (hitPoints, hitDie, constitutionModifier) => {
     const averageHitPointsPerDie = Number(hitDie.slice(1))/2 + 0.5
     const numberOfHitDice = Math.floor(hitPoints/(averageHitPointsPerDie + constitutionModifier))
 
-    return `${Math.ceil(numberOfHitDice * (averageHitPointsPerDie + constitutionModifier))}(${numberOfHitDice}${hitDie}+${numberOfHitDice * constitutionModifier})`
+    return `${numberOfHitDice}${hitDie}+${numberOfHitDice * constitutionModifier}`
   }
 
   const handleSubmit = (event) => {
@@ -53,12 +54,12 @@ function App() {
       charisma: Number(event.target.charisma.value),
       charismaModifier: defineModifier(event.target.charisma.value),
 
-      expectedChallengeRating: Number(event.target.expectedChallengeRating.value),
+      expectedChallengeRating: event.target.expectedChallengeRating.value,
       armorClass: Number(event.target.armorClass.value),
       
       hitPoints: Number(event.target.hitPoints.value),
       hitDie: defineHitDie(event.target.size.value),
-      averageHitPoints: defineAverageHitPoints(Number(event.target.hitPoints.value),
+      hitPointCalculations: defineHitPointCalculations(Number(event.target.hitPoints.value),
                                               defineHitDie(event.target.size.value),
                                               defineModifier(event.target.constitution.value))
     })
@@ -67,8 +68,11 @@ function App() {
   }
 
   return (
-    <MonsterEditor details={monsterDetails}
-                  handleSubmit={handleSubmit} />
+    <>
+      <MonsterEditor details={monsterDetails}
+                    handleSubmit={handleSubmit} />
+      <MonsterStatisticsTableGenerator />
+    </>             
   )
 }
 

@@ -1,6 +1,28 @@
 import styles from "./MonsterEditor.module.css"
 
 function MonsterEditor(props) {
+    const createCRList = () => {
+        const CR = ["0", "1/8", "1/4", "1/2"]
+        for (let i = 1; i <= 30; i++) {
+            CR.push(i.toString())
+        }
+
+        return CR
+    }
+
+    const createECRBlocks = () => {
+        const ECR = createCRList()
+        const ECRBlocks = ECR.map(item => (
+            <option key={item} value={item}>
+                {item}
+            </option>
+        ))
+    
+        return ECRBlocks
+    }
+    
+    const ECRBlocks = createECRBlocks()
+
     return(
         <form className={styles.form} onSubmit={props.handleSubmit}>
             <div className={styles.firstSection}>
@@ -61,27 +83,27 @@ function MonsterEditor(props) {
                 <label htmlFor="stats">Ability Scores</label>
                 <div className={styles.abilityScores}>
                     <div>
-                        <input type="number" name="strength" />
+                        <input type="number" name="strength" min={0} max={30} />
                         <label htmlFor="strength">STR</label>
                     </div>
                     <div>
-                        <input type="number" name="dexterity" />
+                        <input type="number" name="dexterity" min={0} max={30}/>
                         <label htmlFor="dexterity">DEX</label>
                     </div>
                     <div>
-                        <input type="number" name="constitution" />
+                        <input type="number" name="constitution" min={0} max={30}/>
                         <label htmlFor="constitution">CON</label>
                     </div>
                     <div>
-                        <input type="number" name="intelligence" />
+                        <input type="number" name="intelligence" min={0} max={30}/>
                         <label htmlFor="intelligence">INT</label>
                     </div>
                     <div>
-                        <input type="number" name="wisdom" />
+                        <input type="number" name="wisdom" min={0} max={30}/>
                         <label htmlFor="wisdom">WIS</label>
                     </div>
                     <div>
-                        <input type="number" name="charisma" />
+                        <input type="number" name="charisma" min={0} max={30}/>
                         <label htmlFor="charisma">CHA</label>
                     </div>     
                 </div>
@@ -93,16 +115,18 @@ function MonsterEditor(props) {
                                 ECR
                                 <sup>(?)</sup>
                     </label>
-                    <input type="number" min={0} max={30} 
-                            name="expectedChallengeRating" />
+                    <select name="expectedChallengeRating">
+                        <option value="">---</option>
+                        {ECRBlocks}
+                    </select>
                 </div>
                 <div>
                     <label htmlFor="armorClass">AC</label>
-                    <input type="number" name="armorClass" />
+                    <input type="number" name="armorClass" min={0} />
                 </div>
                 <div>
                     <label htmlFor="hitPoints">HP</label>
-                    <input type="number" name="hitPoints" />
+                    <input type="number" name="hitPoints" min={0}/>
                 </div>
             </div>
             <div className={styles.buttonWrapper}>
