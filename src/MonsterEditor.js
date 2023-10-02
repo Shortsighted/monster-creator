@@ -126,7 +126,7 @@ function MonsterEditor(props) {
                 </div>
                 <div>
                     <label htmlFor="hitPoints">HP</label>
-                    <input type="number" name="hitPoints" min={0}/>
+                    <input type="number" name="hitPoints" min={1}/>
                 </div>
             </div>
             <div className={styles.buttonWrapper}>

@@ -1,3 +1,5 @@
+import styles from "./MonsterStatisticsTableGenerator.module.css"
+
 function MonsterStatisticsTableGenerator() {
     const monsterStatisticsTableContent = [
         {CR: "0", XP: "10", profBonus: "2", AC: "13", minHP: "1", maxHP: "6", attackBonus: "3", minDamage: "0", maxDamage: "1", DC: "13"},
@@ -37,7 +39,7 @@ function MonsterStatisticsTableGenerator() {
     ]
 
     return (
-        <table>
+        <table className={styles.monsterStatsTable}>
             <thead>
                 <tr>
                     <th>CR</th>
